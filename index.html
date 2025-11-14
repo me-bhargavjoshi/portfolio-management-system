@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Management System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            margin: 2rem;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        .feature {
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .status {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status">🚀 Successfully Deployed</div>
+        <h1>Portfolio Management System</h1>
+        <div class="subtitle">Enterprise-grade project and resource management with Keka integration</div>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>👥 Employee Management</h3>
+                <p>Sync with Keka HRIS for employee data</p>
+            </div>
+            <div class="feature">
+                <h3>📊 Project Tracking</h3>
+                <p>Manage projects with billing integration</p>
+            </div>
+            <div class="feature">
+                <h3>💼 Client Portal</h3>
+                <p>Complete client and account management</p>
+            </div>
+            <div class="feature">
+                <h3>⏱️ Time Tracking</h3>
+                <p>Integrate with Keka timesheets</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+            <a href="/app" class="btn">🎯 Launch Application</a>
+            <a href="/api/health" class="btn">🔍 Check API Status</a>
+        </div>
+        
+        <div style="margin-top: 2rem; color: #888; font-size: 0.9rem;">
+            <p>💻 Backend API: Ready | 🎨 Frontend UI: Ready | 🗄️ Database: Connected</p>
+            <p>🔐 Secure JWT Authentication | 🔄 Real-time Keka Sync</p>
+        </div>
+    </div>
+</body>
+</html>

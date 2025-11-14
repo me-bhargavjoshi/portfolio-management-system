@@ -4,11 +4,17 @@ import config from './index';
 let pool: Pool;
 
 export const initDatabase = async (): Promise<Pool> => {
+  // Azure Database for PostgreSQL configuration
+  const isAzure = process.env.NODE_ENV === 'production' && process.env.DATABASE_URL?.includes('postgres.database.azure.com');
+  
   pool = new Pool({
     connectionString: config.databaseUrl,
-    max: 20,
+    max: isAzure ? 10 : 20, // Lower connection limit for Azure
     idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
+    connectionTimeoutMillis: isAzure ? 5000 : 2000, // Longer timeout for Azure
+    ssl: isAzure ? {
+      rejectUnauthorized: false, // Azure Database for PostgreSQL requires SSL
+    } : false,
   });
 
   pool.on('error', (err) => {
