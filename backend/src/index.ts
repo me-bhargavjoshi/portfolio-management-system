@@ -1,7 +1,6 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import path from 'path';
 import 'express-async-errors';
 import config from './config';
 import { initDatabase, closeDatabase } from './config/database';
@@ -13,36 +12,10 @@ import { syncScheduler } from './services/sync-scheduler';
 const app: Express = express();
 
 // Middleware
-app.use(helmet({
-  contentSecurityPolicy: false, // Allow inline scripts for our UI
-}));
-app.use(cors({
-  origin: process.env.CORS_ORIGINS?.split(',') || [
-    'http://localhost:3000', 
-    'http://localhost:8080',
-    'https://*.azurewebsites.net',
-    'https://*.azurestaticapps.net'
-  ],
-  credentials: true
-}));
+app.use(helmet());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
-
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
-  // Serve the landing page at root
-  app.get('/', (_req, res) => {
-    res.sendFile(path.join(__dirname, '../../index.html'));
-  });
-  
-  // Serve the main app from frontend-static
-  app.use('/app', express.static(path.join(__dirname, '../../frontend-static')));
-  
-  // Redirect /app to /app/index.html if needed
-  app.get('/app', (_req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend-static/index.html'));
-  });
-}
 
 // Initialize services
 let isInitialized = false;
