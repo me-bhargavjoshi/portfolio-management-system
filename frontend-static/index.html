@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Management System</title>
+  <title>Portfolio Management System - Updated Layout</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; }
@@ -44,7 +44,13 @@
       width: 100%;
     }
     
-    main { margin-left: 250px; padding: 20px; flex: 1; }
+    main { 
+      margin-left: 250px; 
+      padding: 20px; 
+      flex: 1; 
+      overflow-y: auto;
+      max-height: 100vh;
+    }
     
     .page { display: none; }
     .page.active { display: block; }
@@ -243,9 +249,805 @@
       color: #999;
       cursor: not-allowed;
     }
+    
+    /* Status Badge Styles */
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+    
+    .status-approved { background: #d4edda; color: #155724; }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-draft { background: #f8f9fa; color: #6c757d; }
+    .status-rejected { background: #f8d7da; color: #721c24; }
+    .status-submitted { background: #cce5ff; color: #004085; }
+    
+    /* Grouped Timesheet Styles */
+    .timesheet-group {
+      margin-bottom: 20px;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .group-header {
+      background: #f8f9fa;
+      padding: 15px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid #dee2e6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: #495057;
+    }
+    
+    .group-header:hover {
+      background: #e9ecef;
+    }
+    
+    .group-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .group-toggle {
+      font-size: 12px;
+      color: #6c757d;
+    }
+    
+    .group-summary {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      color: #6c757d;
+    }
+    
+    .group-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    
+    .group-stat-value {
+      font-weight: bold;
+      color: #495057;
+    }
+    
+    .group-stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    
+    .group-content {
+      background: white;
+    }
+    
+    .group-content.collapsed {
+      display: none;
+    }
+    
+    .group-content table {
+      margin: 0;
+      border: none;
+      border-radius: 0;
+    }
+    
+    .group-content thead {
+      background: #f1f3f4;
+    }
+    
+    .group-content tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    /* Monthly Matrix Styles - Responsive Design */
+    .matrix-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .matrix-header h2 {
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+    
+    .matrix-header .subtitle {
+      color: #6c757d;
+      font-size: 16px;
+      margin: 0;
+    }
+    
+    .matrix-controls {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    
+    .matrix-container {
+      margin-bottom: 25px;
+      overflow-x: auto;
+      overflow-y: visible;
+    }
+    
+    .table-wrapper {
+      min-width: 100%;
+      overflow-x: auto;
+    }
+    
+    #monthly-matrix .container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .matrix-header {
+      margin-bottom: 25px;
+    }
+    
+    .controls-row {
+      margin-bottom: 20px;
+    }
+    
+    .controls-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .matrix-filters {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+    
+
+    
+    .matrix-actions-section {
+      margin-bottom: 15px;
+    }
+    
+    .integrated-controls-row {
+      display: flex;
+      gap: 25px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #2196f3;
+    }
+    
+    .left-controls-section {
+      flex: 1;
+      min-width: 0;
+      min-height: 280px;
+      background: #fff3e0;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #ff9800;
+    }
+    
+    .date-filters-group {
+      margin-bottom: 8px;
+    }
+    
+    .quick-range-group {
+      margin-top: 5px;
+    }
+    
+    .project-client-filters-group {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      gap: 15px;
+    }
+    
+    .project-client-filters-group .filter-group {
+      flex: 1;
+    }
+    
+    .summary-section {
+      flex: 1;
+      min-width: 350px;
+      background: #e8f5e8;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #4caf50;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .filter-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #495057;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .filter-group select,
+    .filter-group input {
+      padding: 8px 12px;
+      border: 2px solid #e9ecef;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      min-width: 120px;
+    }
+    
+    .filter-group select:focus,
+    .filter-group input:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+    
+    .quick-range-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    
+    .quick-btn {
+      padding: 6px 12px;
+      background: #fff;
+      border: 2px solid #dee2e6;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #495057;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .quick-btn:hover,
+    .quick-btn.active {
+      background: #007bff;
+      border-color: #007bff;
+      color: white;
+      transform: translateY(-1px);
+    }
+    
+    .matrix-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    
+    .btn {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .btn:not(.secondary) {
+      background: #007bff;
+      color: white;
+    }
+    
+    .btn.secondary {
+      background: #6c757d;
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Matrix Container */
+    .matrix-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+    
+    .table-wrapper {
+      overflow-x: auto;
+      overflow-y: visible;
+      max-width: 100%;
+      position: relative;
+    }
+    
+    /* Table Styles */
+    .monthly-matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: white;
+      min-width: 800px;
+    }
+    
+    .monthly-matrix-table th,
+    .monthly-matrix-table td {
+      border: 1px solid #e9ecef;
+      padding: 10px 8px;
+      text-align: center;
+      vertical-align: middle;
+      transition: background-color 0.2s ease;
+    }
+    
+    .monthly-matrix-table th {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      font-weight: 600;
+      color: #495057;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .monthly-matrix-table .project-name {
+      text-align: left;
+      font-weight: 600;
+      background: white;
+      position: sticky;
+      left: 0;
+      z-index: 15;
+      min-width: 180px;
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #2c3e50;
+      border-right: 2px solid #dee2e6;
+    }
+    
+    .monthly-matrix-table .project-name:hover {
+      background: #f8f9fa;
+      cursor: pointer;
+    }
+    
+    .month-group {
+      background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #495057;
+    }
+    
+    .month-subheader {
+      background: #f1f3f4;
+      font-size: 11px;
+      font-weight: 500;
+      color: #6c757d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    
+    .hours-cell {
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      font-size: 12px;
+      min-width: 55px;
+      font-weight: 500;
+    }
+    
+    .hours-billable {
+      color: #28a745;
+      background: rgba(40, 167, 69, 0.05);
+    }
+    
+    .hours-non-billable {
+      color: #6c757d;
+      background: rgba(108, 117, 125, 0.05);
+    }
+    
+    .hours-total {
+      color: #495057;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    /* Loading State */
+    .loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #e9ecef;
+      border-top: 3px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Card View for Mobile */
+    .card-view {
+      display: none;
+    }
+    
+    .matrix-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .project-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 1px solid #e9ecef;
+    }
+    
+    .project-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f8f9fa;
+    }
+    
+    .project-card-title {
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 16px;
+    }
+    
+    .project-card-total {
+      font-weight: 700;
+      color: #007bff;
+      font-size: 14px;
+    }
+    
+    .month-data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    
+    .month-data-item {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .month-data-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #6c757d;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    
+    .month-data-hours {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      gap: 8px;
+    }
+    
+    .month-data-billable {
+      color: #28a745;
+      font-weight: 500;
+    }
+    
+    .month-data-non-billable {
+      color: #6c757d;
+    }
+    
+    .month-data-total {
+      color: #495057;
+      font-weight: 600;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .integrated-controls-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .left-controls-section {
+        flex: 1;
+        min-width: unset;
+      }
+      
+      .summary-section {
+        min-width: unset;
+      }
+      
+      .matrix-filters {
+        justify-content: center;
+      }
+      
+      .quick-range-buttons {
+        justify-content: center;
+      }
+      
+      .matrix-actions {
+        justify-content: center;
+      }
+      
+      .monthly-matrix-table {
+        font-size: 11px;
+      }
+      
+      .monthly-matrix-table th,
+      .monthly-matrix-table td {
+        padding: 6px 4px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .matrix-controls {
+        padding: 15px;
+      }
+      
+      .integrated-controls-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .left-controls-section {
+        flex: 1;
+        min-width: unset;
+      }
+      
+      .summary-section {
+        min-width: unset;
+      }
+      
+      .matrix-filters {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
+      
+      .filter-group {
+        width: 100%;
+      }
+      
+      .filter-group select,
+      .filter-group input {
+        width: 100%;
+        min-width: unset;
+      }
+      
+      .quick-range-buttons {
+        justify-content: center;
+        width: 100%;
+      }
+      
+      .matrix-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      /* Switch to card view on mobile */
+      .table-view {
+        display: none;
+      }
+      
+      .card-view {
+        display: block;
+      }
+      
+      .matrix-header h2 {
+        font-size: 24px;
+      }
+      
+      .matrix-header .subtitle {
+        font-size: 14px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .matrix-controls {
+        padding: 12px;
+      }
+      
+      .quick-btn {
+        font-size: 11px;
+        padding: 4px 8px;
+      }
+      
+      .project-card {
+        padding: 12px;
+      }
+      
+      .month-data-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .matrix-header h2 {
+        font-size: 20px;
+      }
+    }
+    
+    /* Enhanced hover effects */
+    .monthly-matrix-table tbody tr:hover {
+      background-color: rgba(0, 123, 255, 0.02);
+    }
+    
+    .monthly-matrix-table tbody tr:hover .project-name {
+      background-color: rgba(0, 123, 255, 0.05);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+    }
+    
+    .matrix-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .matrix-container {
+      overflow-x: auto;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+    }
+    
+    .summary-row {
+      background: #e7f3ff;
+      font-weight: 600;
+      color: #0056b3;
+    }
+    
+    .summary-stat {
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      background: white;
+    }
+    
+    .summary-label {
+      font-size: 12px;
+      color: #6c757d;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    
+    .summary-value {
+      font-size: 18px;
+      font-weight: 600;
+      color: #495057;
+    }
+    
+    /* Advanced Filters Panel Styles */
+    .filters-panel {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .filters-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .filters-header h3 {
+      margin: 0;
+      color: #495057;
+      font-size: 16px;
+    }
+    
+    .filter-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .filters-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      align-items: end;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .filter-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #6c757d;
+      margin-bottom: 5px;
+    }
+    
+    .filter-group input,
+    .filter-group select {
+      padding: 8px 12px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 14px;
+      background: white;
+    }
+    
+    .filter-group input:focus,
+    .filter-group select:focus {
+      outline: none;
+      border-color: #0066cc;
+      box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.25);
+    }
+    
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #6c757d;
+      color: white;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-small:hover {
+      background: #5a6268;
+    }
+    
+    .btn-small.btn-danger {
+      background: #dc3545;
+    }
+    
+    .btn-small.btn-danger:hover {
+      background: #c82333;
+    }
   </style>
 </head>
 <body>
+  <!-- Load Keka-First Portfolio Management App FIRST -->
+  <script src="app-keka-first.js?v=integrated-layout-refresh-v11&t=1731770994"></script>
+  
   <div class="container">
     <nav>
       <h1>Portfolio Mgmt</h1>
@@ -261,6 +1063,8 @@
         <li><a onclick="showPage('clients')" class="nav-link">Clients</a></li>
         <li><a onclick="showPage('projects')" class="nav-link">Projects</a></li>
         <li><a onclick="showPage('employees')" class="nav-link">Employees</a></li>
+        <li><a onclick="showPage('timesheets')" class="nav-link">Timesheets</a></li>
+        <li><a onclick="showPage('monthly-matrix')" class="nav-link">📊 Monthly Matrix</a></li>
       </ul>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </nav>
@@ -343,15 +1147,24 @@
         <div class="card">
           <h2>Clients List</h2>
           
-          <!-- Search Box -->
-          <div class="form-group" style="margin-bottom: 15px;">
-            <input type="text" id="clients-search" placeholder="🔍 Search clients by name, email, or phone..." 
-                   onkeyup="searchClients()" style="max-width: 400px;">
+          <!-- Filters Panel -->
+          <div class="filters-panel" id="clients-filters">
+            <div class="filters-header">
+              <h3>🔍 Client Filters</h3>
+            </div>
+            <div class="filters-row">
+              <div class="filter-group">
+                <label>Search</label>
+                <input type="text" id="clients-search" placeholder="Search clients..." 
+                       onkeyup="applyClientFilters()">
+              </div>
+            </div>
           </div>
           <table id="clients-table">
             <thead>
               <tr>
-                <th>Client Name</th>
+                <th>Client Code</th>
+                <th>Name</th>
               </tr>
             </thead>
             <tbody id="clients-tbody">
@@ -405,17 +1218,39 @@
         <div class="card">
           <h2>Projects List</h2>
           
-          <!-- Search Box -->
-          <div class="form-group" style="margin-bottom: 15px;">
-            <input type="text" id="projects-search" placeholder="🔍 Search projects by name, client, or budget..." 
-                   onkeyup="searchProjects()" style="max-width: 400px;">
+          <!-- Filters Panel -->
+          <div class="filters-panel" id="projects-filters">
+            <div class="filters-header">
+              <h3>🔍 Project Filters</h3>
+            </div>
+            <div class="filters-row">
+              <div class="filter-group">
+                <label>Search</label>
+                <input type="text" id="projects-search" placeholder="Search projects..." 
+                       onkeyup="applyProjectFilters()">
+              </div>
+              <div class="filter-group">
+                <label>Client</label>
+                <select id="projects-client-filter" onchange="applyProjectFilters()">
+                  <option value="">All Clients</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Billable</label>
+                <select id="projects-billable-filter" onchange="applyProjectFilters()">
+                  <option value="">All</option>
+                  <option value="yes">Billable</option>
+                  <option value="no">Non-Billable</option>
+                </select>
+              </div>
+            </div>
           </div>
           <table id="projects-table">
             <thead>
               <tr>
-                <th>Project Name</th>
-                <th>Client Name</th>
-                <th>Billing Type</th>
+                <th>Project Code</th>
+                <th>Name</th>
+                <th>Client</th>
                 <th>Billable</th>
               </tr>
             </thead>
@@ -472,14 +1307,36 @@
         <div class="card">
           <h2>Employees List</h2>
           
-          <!-- Search Box -->
-          <div class="form-group" style="margin-bottom: 15px;">
-            <input type="text" id="employees-search" placeholder="🔍 Search employees by name, email, or department..." 
-                   onkeyup="searchEmployees()" style="max-width: 400px;">
+          <!-- Filters Panel -->
+          <div class="filters-panel" id="employees-filters">
+            <div class="filters-header">
+              <h3>🔍 Employee Filters</h3>
+            </div>
+            <div class="filters-row">
+              <div class="filter-group">
+                <label>Search</label>
+                <input type="text" id="employees-search" placeholder="Search employees..." 
+                       onkeyup="applyEmployeeFilters()">
+              </div>
+              <div class="filter-group">
+                <label>Job Title</label>
+                <select id="employees-job-title-filter" onchange="applyEmployeeFilters()">
+                  <option value="">All Job Titles</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Department</label>
+                <select id="employees-department-filter" onchange="applyEmployeeFilters()">
+                  <option value="">All Departments</option>
+                </select>
+              </div>
+            </div>
           </div>
           <table id="employees-table">
             <thead>
               <tr>
+                <th>Sr. No</th>
+                <th>Employee ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Job Title</th>
@@ -491,11 +1348,263 @@
           </table>
         </div>
       </div>
+      
+      <!-- Timesheets Page -->
+      <div id="timesheets" class="page">
+        <div class="card">
+          <h2>Timesheets Management</h2>
+          
+          <!-- Keka Sync Section -->
+          <div class="sync-section">
+            <div class="sync-info">
+              <div class="sync-title">📥 Sync from Keka</div>
+              <div class="sync-status">Import timesheet entries directly from Keka HRIS</div>
+              <div class="sync-timestamp" id="timesheets-last-sync"></div>
+              <div class="sync-count" id="timesheets-sync-count">Synced: 0</div>
+            </div>
+            <button class="sync-button" id="timesheets-sync-btn" onclick="syncTimesheetsFromKeka()">Sync Now</button>
+          </div>
+          
+          <div class="alert alert-info">
+            ℹ️ Timesheets are automatically synced from Keka. Use "Sync Now" button above to update.
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>Timesheet Entries</h2>
+          
+          <!-- Filters Panel -->
+          <div class="filters-panel" id="timesheets-filters">
+            <div class="filters-header">
+              <h3>🔍 Timesheet Filters</h3>
+            </div>
+            <div class="filters-row">
+              <div class="filter-group">
+                <label>Search</label>
+                <input type="text" id="timesheets-search" placeholder="Search timesheets..." 
+                       onkeyup="applyTimesheetFilters()">
+              </div>
+              <div class="filter-group">
+                <label>Employees</label>
+                <select id="timesheets-employee-filter" onchange="applyTimesheetFilters()">
+                  <option value="">All Employees</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Project</label>
+                <select id="timesheets-project-filter" onchange="applyTimesheetFilters()">
+                  <option value="">All Projects</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Billable</label>
+                <select id="timesheets-billable-filter" onchange="applyTimesheetFilters()">
+                  <option value="">All</option>
+                  <option value="yes">Billable Only</option>
+                  <option value="no">Non-Billable Only</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>📊 Group By</label>
+                <select id="timesheets-group-by" onchange="applyTimesheetFilters()">
+                  <option value="">No Grouping (List View)</option>
+                  <option value="project">Group by Project</option>
+                  <option value="employee">Group by Employee</option>
+                  <option value="client">Group by Client</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <table id="timesheets-table">
+            <thead>
+              <tr>
+                <th>Employee Name</th>
+                <th>Project</th>
+                <th>Task</th>
+                <th>Billable Hours</th>
+                <th>Non billable Hours</th>
+                <th>Total Hours</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="timesheets-tbody">
+            </tbody>
+          </table>
+          
+          <!-- Pagination -->
+          <div style="margin-top: 20px; text-align: center;">
+            <button id="prev-page" onclick="loadTimesheets(currentTimesheetPage - 1)" disabled>Previous</button>
+            <span id="page-info" style="margin: 0 15px;">Page 1 of 1</span>
+            <button id="next-page" onclick="loadTimesheets(currentTimesheetPage + 1)" disabled>Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monthly Matrix Page -->
+      <div id="monthly-matrix" class="page">
+        <div class="container">
+          <div class="matrix-header">
+            <h2>📊 Monthly Project Hours Matrix</h2>
+            <p class="subtitle">Track project hours with customizable date ranges and responsive design - Updated Layout v15 - Orange Box Height Adjusted</p>
+          </div>
+          
+          <!-- Matrix Controls -->
+          <div class="matrix-controls">
+            <!-- Integrated Date Controls and Summary Section -->
+            <div class="controls-row integrated-controls-row">
+              <div class="left-controls-section">
+                <!-- Date Filters -->
+                <div class="date-filters-group">
+                  <div class="matrix-filters">
+                    <div class="filter-group">
+                      <label>Year</label>
+                      <select id="matrix-year-filter" onchange="loadMonthlyMatrix()">
+                        <option value="2024">2024</option>
+                        <option value="2025" selected>2025</option>
+                        <option value="2026">2026</option>
+                      </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                      <label>From Month</label>
+                      <select id="matrix-start-month" onchange="loadMonthlyMatrix()">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                      </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                      <label>To Month</label>
+                      <select id="matrix-end-month" onchange="loadMonthlyMatrix()">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12" selected>December</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Quick Range Buttons - Directly below date filters -->
+                <div class="quick-range-group">
+                  <div class="quick-range-buttons">
+                    <button class="quick-btn" onclick="setQuickRange('q1')">Q1</button>
+                    <button class="quick-btn" onclick="setQuickRange('q2')">Q2</button>
+                    <button class="quick-btn" onclick="setQuickRange('q3')">Q3</button>
+                    <button class="quick-btn" onclick="setQuickRange('q4')">Q4</button>
+                    <button class="quick-btn" onclick="setQuickRange('year')">Full Year</button>
+                  </div>
+                </div>
+                
+                <!-- Project and Client Filters - Below quarter buttons -->
+                <div class="project-client-filters-group">
+                  <div class="filter-group">
+                    <label>Project Filter</label>
+                    <input type="text" id="matrix-project-search" placeholder="Search projects..." 
+                           onkeyup="filterMatrixProjects()">
+                  </div>
+                  <div class="filter-group">
+                    <label>Client Filter</label>
+                    <select id="matrix-client-filter" onchange="filterMatrixProjects()">
+                      <option value="">All Clients</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Matrix Summary -->
+              <div class="summary-section">
+                <div class="matrix-summary" style="padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                  <h4 style="margin: 0 0 15px 0; color: #2c3e50;">📈 <span id="matrix-period-label">Period</span> Summary</h4>
+                  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                    <div class="summary-stat">
+                      <div class="summary-label">Total Projects</div>
+                      <div class="summary-value" id="matrix-total-projects">-</div>
+                    </div>
+                    <div class="summary-stat">
+                      <div class="summary-label">Total Billable Hours</div>
+                      <div class="summary-value" id="matrix-total-billable" style="color: #28a745;">-</div>
+                    </div>
+                    <div class="summary-stat">
+                      <div class="summary-label">Total Non-Billable Hours</div>
+                      <div class="summary-value" id="matrix-total-non-billable" style="color: #6c757d;">-</div>
+                    </div>
+                    <div class="summary-stat">
+                      <div class="summary-label">Grand Total Hours</div>
+                      <div class="summary-value" id="matrix-grand-total" style="color: #007bff;">-</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+            <!-- Action Buttons -->
+            <div class="controls-row matrix-actions-section">
+              <div class="matrix-actions">
+                <button class="btn secondary" onclick="toggleMatrixView()">
+                  <span id="view-toggle-text">📱 Card View</span>
+                </button>
+                <button class="btn" onclick="exportMatrixToCSV()">📊 Export CSV</button>
+                <button class="btn" onclick="loadMonthlyMatrix()">🔄 Refresh</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Matrix Views -->
+          <!-- Table View (Desktop) -->
+          <div class="matrix-container table-view" id="matrix-table-view">
+            <div class="table-wrapper">
+              <table class="monthly-matrix-table" id="monthly-matrix-table">
+                <thead id="matrix-table-head">
+                  <!-- Dynamic headers will be generated here -->
+                </thead>
+                <tbody id="monthly-matrix-tbody">
+                  <tr>
+                    <td colspan="100%" style="text-align: center; padding: 40px; color: #6c757d;">
+                      <div class="loading-state">
+                        <div class="loading-spinner"></div>
+                        <p>Loading monthly matrix data...</p>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Card View (Mobile) -->
+          <div class="matrix-container card-view" id="matrix-card-view" style="display: none;">
+            <div class="matrix-cards" id="matrix-cards-container">
+              <!-- Dynamic cards will be generated here -->
+            </div>
+          </div>
+
+        </div>
+      </div>
     </main>
   </div>
 
   <script>
-    const API_URL = 'http://127.0.0.1:3001/api';
     let currentUser = null;
     let isRedirecting = false;
 
@@ -513,6 +1622,8 @@
       }
     });
 
+    // COMMENTED OUT - Using external app-keka-first.js version instead
+    /*
     function showPage(pageName) {
       // Hide all pages
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -526,7 +1637,9 @@
       if (pageName === 'clients') loadClients();
       else if (pageName === 'projects') loadProjects();
       else if (pageName === 'employees') loadEmployees();
+      else if (pageName === 'timesheets') loadTimesheets();
     }
+    */
 
     async function loadDashboardData() {
       try {
@@ -547,29 +1660,25 @@
           
           // Get real data for KPIs
           try {
-            // Get projects count
-            const projectsRes = await fetch(`${API_URL}/projects`, {
-              headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const projectsData = await projectsRes.json();
-            const projectCount = projectsData.success ? projectsData.total || 0 : 0;
-            document.getElementById('total-projects').textContent = projectCount;
-            
-            // Get clients count
-            const clientsRes = await fetch(`${API_URL}/clients`, {
-              headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const clientsData = await clientsRes.json();
-            const clientCount = clientsData.success ? clientsData.total || 0 : 0;
-            document.getElementById('total-clients').textContent = clientCount;
+            // Use the external API call functions for consistency
+            if (window.apiCall) {
+              // Get projects count
+              const projectsRes = await window.apiCall('/keka-projects');
+              const projectCount = projectsRes.success && projectsRes.pagination ? projectsRes.pagination.total || 0 : 0;
+              document.getElementById('total-projects').textContent = projectCount;
+              
+              // Get clients count
+              const clientsRes = await window.apiCall('/keka-clients');
+              const clientCount = clientsRes.success && clientsRes.pagination ? clientsRes.pagination.total || 0 : 0;
+              document.getElementById('total-clients').textContent = clientCount;
+            }
             
             // Get employees count
-            const empRes = await fetch(`${API_URL}/employees`, {
-              headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const empData = await empRes.json();
-            const empCount = empData.success ? empData.total || 0 : 0;
-            document.getElementById('total-employees').textContent = empCount;
+            if (window.apiCall) {
+              const empRes = await window.apiCall('/keka-employees?status=active');
+              const empCount = empRes.success && empRes.pagination ? empRes.pagination.total || 0 : 0;
+              document.getElementById('total-employees').textContent = empCount;
+            }
             
           } catch (e) {
             console.error('Error loading KPI data:', e);
@@ -645,6 +1754,8 @@
       }
     }
 
+    // COMMENTED OUT - Using external app-keka-first.js version instead
+    /*
     async function loadClients() {
       try {
         const token = localStorage.getItem('token');
@@ -672,6 +1783,7 @@
         showAlert('Failed to load clients: ' + error.message, 'error', 'alert');
       }
     }
+    */
 
     async function deleteClient(id) {
       if (!confirm('Are you sure you want to delete this client?')) return;
@@ -749,6 +1861,8 @@
       }
     }
 
+    // COMMENTED OUT - Using external app-keka-first.js version instead
+    /*
     async function loadProjects() {
       try {
         const token = localStorage.getItem('token');
@@ -801,6 +1915,7 @@
         showAlert('Failed to load projects: ' + error.message, 'error', 'alert');
       }
     }
+    */
 
     async function deleteProject(id) {
       if (!confirm('Are you sure you want to delete this project?')) return;
@@ -875,6 +1990,8 @@
       }
     }
 
+    // COMMENTED OUT - Using external app-keka-first.js version instead
+    /*
     async function loadEmployees() {
       try {
         const token = localStorage.getItem('token');
@@ -905,6 +2022,7 @@
         showAlert('Failed to load employees: ' + error.message, 'error', 'alert');
       }
     }
+    */
 
     async function deleteEmployee(id) {
       if (!confirm('Are you sure you want to delete this employee?')) return;
@@ -1082,6 +2200,165 @@
       }
     }
 
+    // ============ TIMESHEETS FUNCTIONS ============
+    
+    let currentTimesheetPage = 1;
+    const timesheetsPerPage = 50;
+    
+    // COMMENTED OUT - Using external app-keka-first.js loadTimesheets function instead
+    // This inline function was causing column misalignment by adding a date column
+    /*
+    async function loadTimesheets(page = 1) {
+      try {
+        currentTimesheetPage = page;
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_URL}/keka/timesheets?page=${page}&limit=${timesheetsPerPage}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        const data = await response.json();
+        const tbody = document.getElementById('timesheets-tbody');
+        tbody.innerHTML = '';
+        
+        if (data.success && Array.isArray(data.data)) {
+          data.data.forEach(entry => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${entry.date ? new Date(entry.date).toLocaleDateString() : 'N/A'}</td>
+              <td>${entry.employee_name || 'Unknown'}</td>
+              <td>${entry.project_name || 'Unknown Project'}</td>
+              <td>${entry.task_name || 'No Task'}</td>
+              <td>${entry.hours || 0}h</td>
+              <td><span class="status-badge status-${(entry.status || 'pending').toLowerCase()}">${entry.status || 'Pending'}</span></td>
+              <td>${entry.notes || '-'}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+          
+          // Update pagination
+          updateTimesheetsPagination(data.pagination);
+          
+          // Load employees for filter dropdown
+          loadEmployeesForFilter();
+          
+        } else {
+          tbody.innerHTML = '<tr><td colspan="7">No timesheet entries found</td></tr>';
+        }
+      } catch (error) {
+        console.error('Error loading timesheets:', error);
+        document.getElementById('timesheets-tbody').innerHTML = '<tr><td colspan="7">Error loading timesheets</td></tr>';
+      }
+    }
+    */
+    
+    async function loadEmployeesForFilter() {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_URL}/keka-employees?status=active`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        const data = await response.json();
+        const select = document.getElementById('timesheets-employee-filter');
+        
+        if (data.success && Array.isArray(data.data)) {
+          select.innerHTML = '<option value="">All Employees</option>';
+          data.data.forEach(emp => {
+            select.innerHTML += `<option value="${emp.id}">${emp.first_name} ${emp.last_name}</option>`;
+          });
+        }
+      } catch (error) {
+        console.error('Error loading employees for filter:', error);
+      }
+    }
+    
+    function updateTimesheetsPagination(pagination) {
+      if (!pagination) return;
+      
+      const prevBtn = document.getElementById('prev-page');
+      const nextBtn = document.getElementById('next-page');
+      const pageInfo = document.getElementById('page-info');
+      
+      prevBtn.disabled = currentTimesheetPage <= 1;
+      nextBtn.disabled = currentTimesheetPage >= (pagination.totalPages || 1);
+      pageInfo.textContent = `Page ${currentTimesheetPage} of ${pagination.totalPages || 1}`;
+    }
+    
+    function searchTimesheets() {
+      const searchTerm = document.getElementById('timesheets-search').value.toLowerCase();
+      const table = document.getElementById('timesheets-table');
+      const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+      
+      let visibleCount = 0;
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        
+        if (cells.length === 1) continue; // Skip "no data" rows
+        
+        const employee = cells[1]?.textContent?.toLowerCase() || '';
+        const project = cells[2]?.textContent?.toLowerCase() || '';
+        const task = cells[3]?.textContent?.toLowerCase() || '';
+        const notes = cells[6]?.textContent?.toLowerCase() || '';
+        
+        if (employee.includes(searchTerm) || project.includes(searchTerm) || 
+            task.includes(searchTerm) || notes.includes(searchTerm)) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      }
+      
+      if (visibleCount === 0 && searchTerm) {
+        const tbody = table.getElementsByTagName('tbody')[0];
+        if (!document.getElementById('no-results-timesheets')) {
+          const noResults = document.createElement('tr');
+          noResults.id = 'no-results-timesheets';
+          noResults.innerHTML = '<td colspan="7" style="text-align:center;color:#999;">No timesheets found matching your search</td>';
+          tbody.appendChild(noResults);
+        }
+      } else {
+        const noResults = document.getElementById('no-results-timesheets');
+        if (noResults) noResults.remove();
+      }
+    }
+    
+    function filterTimesheets() {
+      const dateFrom = document.getElementById('timesheets-date-from').value;
+      const dateTo = document.getElementById('timesheets-date-to').value;
+      const employeeFilter = document.getElementById('timesheets-employee-filter').value;
+      
+      const table = document.getElementById('timesheets-table');
+      const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+      
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        
+        if (cells.length === 1) continue; // Skip "no data" rows
+        
+        const dateCell = cells[0]?.textContent || '';
+        const employeeCell = cells[1]?.textContent || '';
+        
+        let showRow = true;
+        
+        // Date filtering
+        if (dateFrom || dateTo) {
+          const entryDate = new Date(dateCell);
+          if (dateFrom && entryDate < new Date(dateFrom)) showRow = false;
+          if (dateTo && entryDate > new Date(dateTo)) showRow = false;
+        }
+        
+        // Employee filtering
+        if (employeeFilter && !employeeCell.toLowerCase().includes(employeeFilter.toLowerCase())) {
+          showRow = false;
+        }
+        
+        row.style.display = showRow ? '' : 'none';
+      }
+    }
+
     // ============ KEKA SYNC FUNCTIONS ============
     
     async function syncClientsFromKeka() {
@@ -1094,6 +2371,10 @@
     
     async function syncEmployeesFromKeka() {
       await performSync('employees', 'Syncing employees from Keka...');
+    }
+    
+    async function syncTimesheetsFromKeka() {
+      await performSync('timesheets', 'Syncing timesheets from Keka...');
     }
     
     async function syncAllData() {
@@ -1183,6 +2464,7 @@
           if (type === 'clients') loadClients();
           else if (type === 'projects') loadProjects();
           else if (type === 'employees') loadEmployees();
+          else if (type === 'timesheets') loadTimesheets();
 
           // Reset button after 2 seconds
           setTimeout(() => {
@@ -1210,7 +2492,7 @@
         
         // Get sync status - call once, not per type
         try {
-          const response = await fetch(`${API_URL}/keka/sync/status`, {
+          const response = await fetch(`${API_URL}/keka-sync/sync/status`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           
@@ -1218,7 +2500,7 @@
             const data = await response.json();
             if (data.success) {
               // Update each type's status
-              const types = ['clients', 'projects', 'employees'];
+              const types = ['clients', 'projects', 'employees', 'timesheets'];
               for (const type of types) {
                 if (data[type]) {
                   const count = data[type].count || 0;
