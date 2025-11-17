@@ -1,11 +1,16 @@
 import express from 'express';
 import { authMiddleware, errorHandler } from '../middleware/auth';
 import { AuthController } from '../controllers/auth';
-import * as ClientController from '../controllers/client';
-import * as ProjectController from '../controllers/project';
-import * as EmployeeController from '../controllers/employee';
+// import * as ClientController from '../controllers/client';        // DISABLED - Using Keka endpoints
+// import * as ProjectController from '../controllers/project';      // DISABLED - Using Keka endpoints  
+// import * as EmployeeController from '../controllers/employee';    // DISABLED - Using Keka endpoints
 import * as AccountController from '../controllers/account';
 import kekaRoutes from '../controllers/keka-sync';
+import kekaEmployeesRoutes from './keka-employees';
+import kekaClientsRoutes from './keka-clients';
+import kekaProjectsRoutes from './keka-projects';
+import kekaDashboardRoutes from './keka-dashboard';
+import resourcePlanningRoutes from './resource-planning';
 
 export const createRoutes = (app: express.Application): void => {
   // Health check
@@ -20,13 +25,13 @@ export const createRoutes = (app: express.Application): void => {
   app.post('/api/auth/logout', authMiddleware, AuthController.logout);
   app.get('/api/auth/me', authMiddleware, AuthController.getCurrentUser);
 
-  // Client routes (CRUD)
-  app.post('/api/clients', authMiddleware, ClientController.createClient);
-  app.get('/api/clients', authMiddleware, ClientController.getAllClients);
-  app.get('/api/clients/search', authMiddleware, ClientController.searchClients);
-  app.get('/api/clients/:id', authMiddleware, ClientController.getClientById);
-  app.put('/api/clients/:id', authMiddleware, ClientController.updateClient);
-  app.delete('/api/clients/:id', authMiddleware, ClientController.deleteClient);
+  // OLD Client routes (DISABLED - Use /api/keka-clients instead)
+  // app.post('/api/clients', authMiddleware, ClientController.createClient);
+  // app.get('/api/clients', authMiddleware, ClientController.getAllClients);
+  // app.get('/api/clients/search', authMiddleware, ClientController.searchClients);
+  // app.get('/api/clients/:id', authMiddleware, ClientController.getClientById);
+  // app.put('/api/clients/:id', authMiddleware, ClientController.updateClient);
+  // app.delete('/api/clients/:id', authMiddleware, ClientController.deleteClient);
 
   // Account routes (CRUD)
   app.post('/api/accounts', authMiddleware, AccountController.createAccount);
@@ -35,26 +40,35 @@ export const createRoutes = (app: express.Application): void => {
   app.put('/api/accounts/:id', authMiddleware, AccountController.updateAccount);
   app.delete('/api/accounts/:id', authMiddleware, AccountController.deleteAccount);
 
-  // Project routes (CRUD)
-  app.post('/api/projects', authMiddleware, ProjectController.createProject);
-  app.get('/api/projects', authMiddleware, ProjectController.getAllProjects);
-  app.get('/api/projects/active', authMiddleware, ProjectController.getActiveProjects);
-  app.get('/api/projects/search', authMiddleware, ProjectController.searchProjects);
-  app.get('/api/projects/:id', authMiddleware, ProjectController.getProjectById);
-  app.put('/api/projects/:id', authMiddleware, ProjectController.updateProject);
-  app.delete('/api/projects/:id', authMiddleware, ProjectController.deleteProject);
+  // OLD Project routes (DISABLED - Use /api/keka-projects instead)
+  // app.post('/api/projects', authMiddleware, ProjectController.createProject);
+  // app.get('/api/projects', authMiddleware, ProjectController.getAllProjects);
+  // app.get('/api/projects/active', authMiddleware, ProjectController.getActiveProjects);
+  // app.get('/api/projects/search', authMiddleware, ProjectController.searchProjects);
+  // app.get('/api/projects/:id', authMiddleware, ProjectController.getProjectById);
+  // app.put('/api/projects/:id', authMiddleware, ProjectController.updateProject);
+  // app.delete('/api/projects/:id', authMiddleware, ProjectController.deleteProject);
 
-  // Employee routes (CRUD)
-  app.post('/api/employees', authMiddleware, EmployeeController.createEmployee);
-  app.get('/api/employees', authMiddleware, EmployeeController.getAllEmployees);
-  app.get('/api/employees/count/active', authMiddleware, EmployeeController.getActiveEmployeesCount);
-  app.get('/api/employees/search', authMiddleware, EmployeeController.searchEmployees);
-  app.get('/api/employees/:id', authMiddleware, EmployeeController.getEmployeeById);
-  app.put('/api/employees/:id', authMiddleware, EmployeeController.updateEmployee);
-  app.delete('/api/employees/:id', authMiddleware, EmployeeController.deleteEmployee);
+  // OLD Employee routes (DISABLED - Use /api/keka-employees instead)
+  // app.post('/api/employees', authMiddleware, EmployeeController.createEmployee);
+  // app.get('/api/employees', authMiddleware, EmployeeController.getAllEmployees);
+  // app.get('/api/employees/count/active', authMiddleware, EmployeeController.getActiveEmployeesCount);
+  // app.get('/api/employees/search', authMiddleware, EmployeeController.searchEmployees);
+  // app.get('/api/employees/:id', authMiddleware, EmployeeController.getEmployeeById);
+  // app.put('/api/employees/:id', authMiddleware, EmployeeController.updateEmployee);
+  // app.delete('/api/employees/:id', authMiddleware, EmployeeController.deleteEmployee);
 
   // Keka Sync routes (CRUD and sync operations)
-  app.use('/api/keka', kekaRoutes);
+  app.use('/api/keka-sync', kekaRoutes);
+
+  // Keka-first API routes (using Keka data as primary source)
+  app.use('/api/keka', authMiddleware, kekaDashboardRoutes);
+  app.use('/api/keka-employees', authMiddleware, kekaEmployeesRoutes);
+  app.use('/api/keka-clients', authMiddleware, kekaClientsRoutes);
+  app.use('/api/keka-projects', authMiddleware, kekaProjectsRoutes);
+
+  // Resource Planning routes (Gantt chart and booking management)
+  app.use('/api/resource-planning', authMiddleware, resourcePlanningRoutes);
 
   // Protected routes
   app.get('/api/dashboard', authMiddleware, (_req, res) => {

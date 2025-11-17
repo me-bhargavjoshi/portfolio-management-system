@@ -7,18 +7,17 @@
  */
 
 import { Response } from 'express';
-import TimesheetSyncService from '../services/timesheetSync';
-import TimesheetProcessingService from '../services/timesheetProcessor';
 import { getDatabase } from '../config/database';
 import { AuthRequest } from '../middleware/auth';
 
 export class TimesheetController {
-  private syncService: TimesheetSyncService;
-  private processingService: TimesheetProcessingService;
+  // TODO: Implement with Keka-first architecture
+  // private syncService: TimesheetSyncService;
+  // private processingService: TimesheetProcessingService;
 
   constructor() {
-    this.syncService = new TimesheetSyncService();
-    this.processingService = new TimesheetProcessingService();
+    // this.syncService = new TimesheetSyncService();
+    // this.processingService = new TimesheetProcessingService();
   }
 
   // ============================================================================

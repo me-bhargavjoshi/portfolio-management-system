@@ -2,7 +2,7 @@ import React from 'react';
 
 interface NavigationProps {
   currentPage: string;
-  onNavigate: (page: 'dashboard' | 'projects' | 'employees') => void;
+  onNavigate: (page: 'dashboard' | 'projects' | 'employees' | 'timesheets') => void;
   onLogout: () => void;
 }
 
@@ -11,6 +11,7 @@ export default function Navigation({ currentPage, onNavigate, onLogout }: Naviga
     { label: 'Dashboard', path: 'dashboard' },
     { label: 'Projects', path: 'projects' },
     { label: 'Employees', path: 'employees' },
+    { label: 'Timesheets', path: 'timesheets' },
   ];
 
   return (
@@ -24,7 +25,7 @@ export default function Navigation({ currentPage, onNavigate, onLogout }: Naviga
         {navItems.map((item) => (
           <li key={item.path}>
             <button
-              onClick={() => onNavigate(item.path as 'dashboard' | 'projects' | 'employees')}
+              onClick={() => onNavigate(item.path as 'dashboard' | 'projects' | 'employees' | 'timesheets')}
               className={`w-full text-left px-4 py-2 rounded transition text-sm font-medium ${
                 currentPage === item.path
                   ? 'bg-indigo-600'
