@@ -1,0 +1,103 @@
+
+> portfolio-backend@1.0.0 dev
+> ts-node src/index.ts
+
+Initializing database...
+Database connection successful
+Database initialized
+Initializing Redis...
+Redis initialization complete
+All services initialized successfully
+Portfolio Management API running on port 3001
+Environment: development
+⏸️  Sync scheduler is disabled
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis connection skipped (optional service): Redis connect timeout
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
+Redis error (optional service): connect ECONNREFUSED ::1:6379
